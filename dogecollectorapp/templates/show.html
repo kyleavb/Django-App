@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+
+{% load static %}
+{% block content %}
+<h1>{{ dog.name }}</h1>
+<h3>Description: {{ dog.description }}</h3>
+<h3>Age: {{ dog.age }}</h3>
+<h3>Breed: {{ dog.breed }}</h3>
+<a class="btn" href="/user/{{ dog.user.username }}">Adopted By: {{ dog.user.username }}</a>
+<br />
+<div class="row">
+    <div class="form col s6">
+        <h3>Give a dog a toy!</h3>
+        <form action="/{{ dog.id }}/toy/create/" method="POST">
+            {% csrf_token %}
+            {{ form }}
+            <input class="btn green" type="submit" value="Submit!">
+        </form>
+    </div>
+</div>
+    
+<br />
+<a class='btn' href="/{{ dog.id }}/edit">Edit Dog Info</a>
+<hr />
+<form action="/{{ dog.id }}/delete/" method="POST">
+    {% csrf_token %}
+    <input type="submit" class="btn red" value="Delete" />
+</form>
+{% endblock %}

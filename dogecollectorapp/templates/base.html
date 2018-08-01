@@ -1,0 +1,32 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Doge Collector</title>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.css">
+        <link rel="stylesheet" type="text/css" href="{% static 'style.css' %}">
+        
+    </head>
+    <body>
+        <nav>
+            <div class="nav-wrapper blue header">
+                <a href="/" class="center brand-logo">Doge Collector</a>
+                <ul id="nav-mobile" class="mid hide-on-med-and-down">
+                <li><a href="/">Home</a></li>
+                {% if user.is_authenticated %}
+                    <li><a href="{% url 'profile' user.username %}">Hello {{user.username }}</a></li>
+                    <li><a href="/logout">Log Out</a></li>
+                {% else %}
+                    <li><a href="{% url 'signup' %}">SignUp</a></li>
+                    <li><a href="/login">Login</a></li>
+                {% endif %}
+                </ul>
+            </div>
+        </nav>
+        {% block content %}
+        {% endblock %}
+        <footer>All Rights Reserved, DogeCollector LLC. 2018</footer>
+        <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+        <script src="{% static 'app.js' %}"></script>
+    </body>
+</html>

@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+    {% for dog in dogs %}
+    <h3><a href='/{{ dog.id }}'+{{count}}>Name: {{dog.name}}</a></h3>
+    <h5>Desc: {{dog.description}}</h5>
+    <ul>
+        <li>Breed: {{dog.breed}}</li>
+        <a href="/user/{{ dog.user.username }}">Adopted By: {{ dog.user.username }}</a>
+        {% if dog.age > 0 %}
+            <li>Age: {{dog.age}}</li>
+        {% else %}
+            <li>Age: Pupperonie!</li>
+        {% endif %}
+        <a class="btn like waves-effect waves-light" data-id="{{ dog.id }}">
+            Like: {% if dog.likes > 0 %}
+                {{ dog.likes }}
+            {% else %}
+                None :(
+            {% endif %}
+        </a>
+    </ul>
+    <hr />
+    {% endfor %}
+    <div class="row">
+        <div class="col s10 offset-s1 form">
+            <h4>Add a Doggo</h4>
+            <form action="post_dog/" method="POST">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <input class='btn' type="submit" value="submit" />
+            </form>
+        </div>
+    </div>
+    
+{% endblock %}

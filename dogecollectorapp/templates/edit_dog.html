@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <div class="row">
+        <div class="col s10 offset-s1 form">
+            <h4>Edit this Doggo</h4>
+            <form action="/{{ dog.id }}/edit/" method="POST">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <input class='btn' type="submit" value="submit" />
+            </form>
+        </div>
+    </div>
+{% endblock %}

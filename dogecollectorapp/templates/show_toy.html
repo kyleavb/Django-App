@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+
+{% load static %}
+{% block content %}
+
+<h1>Toy: {{ toy.name }}</h1>
+<h3>Dogs who also enjoy this Toy</h3>
+{% for dog in dogs %}
+    <li><a href="/{{ dog.id }}">{{ dog.name }}</a></li>
+{% endfor %}
+{% endblock %}
